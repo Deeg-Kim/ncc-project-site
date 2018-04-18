@@ -75,4 +75,5 @@
   'backend\\Controllers\\users' => 'modules/backend/controllers/users.php',
   'backend\\Controllers\\userroles' => 'modules/backend/controllers/userroles.php',
   'Dgkim\\DigitalResourcesDb\\Components\\ResourcesList' => 'plugins/dgkim/digitalresourcesdb/components/ResourcesList.php',
+  'Dgkim\\DigitalResourcesDb\\Components\\ResourceView' => 'plugins/dgkim/digitalresourcesdb/components/ResourceView.php',
 );

@@ -1,0 +1,8 @@
+1524039868a:1:{s:17:"view-resource.htm";a:10:{s:8:"fileName";s:17:"view-resource.htm";s:7:"content";s:129:"title = "View Resource"
+url = "/resource/:id"
+layout = "Standard"
+is_hidden = 0
+
+[resourceView]
+==
+{% component 'resourceView' %}";s:5:"mtime";i:1524039264;s:6:"markup";s:30:"{% component 'resourceView' %}";s:4:"code";N;s:5:"title";s:13:"View Resource";s:3:"url";s:13:"/resource/:id";s:6:"layout";s:8:"Standard";s:9:"is_hidden";s:1:"0";s:12:"resourceView";a:0:{}}}

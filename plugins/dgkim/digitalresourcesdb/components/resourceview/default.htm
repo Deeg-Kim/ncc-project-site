@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<div style="width: 100%; height: 15px"></div>
+		<a href="{{ url('/' )}}">Back to all resources</a>
+		<div class="card" style="width: 100%; margin: 10px 0 10px 0">
+			<div class="card-body">
+				<h3 class="card-title">{{ resource.name_japanese }}</h3>
+				<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
+				{% for category in resource.categories %}
+				<span class="badge badge-primary">{{ category.name_english }}</span>
+				{% endfor %}
+				<p>
+					<a href="#" class="card-link">{{ resource.link }}</a>
+				</p>
+				<p class="card-text">{{ resource.description|raw }}</p>
+				<p class="card-text"><b>Keywords:</b> {{ resource.keywords }}</p>
+		  	</div>
+		</div>
+	</div>
+</div>

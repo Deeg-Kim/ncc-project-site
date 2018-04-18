@@ -8,6 +8,7 @@ class Plugin extends PluginBase
     {
 		return [
 			'Dgkim\DigitalResourcesDb\Components\ResourcesList'				 	=> 'resourcesList',
+			'Dgkim\DigitalResourcesDb\Components\ResourceView'				 	=> 'resourceView',
 		];
     }
 

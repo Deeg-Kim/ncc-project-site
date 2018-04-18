@@ -26,14 +26,18 @@ class __TwigTemplate_a5d73246d6b075e9226d74abbae119036628796cf682f903a2b6676f124
             // line 4
             echo "\t\t\t<div class=\"card\" style=\"width: 100%; margin: 10px 0 10px 0\">
 \t\t\t\t<div class=\"card-body\">
-\t\t\t\t\t<h5 class=\"card-title\">";
+\t\t\t\t\t<h3 class=\"card-title\"><a href=\"";
             // line 6
+            echo url("/resource/");
+            echo "/";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["resource"], "id", array()), "html", null, true);
+            echo "\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["resource"], "name_japanese", array()), "html", null, true);
-            echo "</h5>
-\t\t\t\t\t<h6 class=\"card-subtitle mb-2 text-muted\">";
+            echo "</a></h3>
+\t\t\t\t\t<h5 class=\"card-subtitle mb-2 text-muted\">";
             // line 7
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["resource"], "name_english", array()), "html", null, true);
-            echo "</h6>
+            echo "</h5>
 \t\t\t\t\t";
             // line 8
             $context['_parent'] = $context;
@@ -100,7 +104,7 @@ class __TwigTemplate_a5d73246d6b075e9226d74abbae119036628796cf682f903a2b6676f124
 
     public function getDebugInfo()
     {
-        return array (  88 => 21,  77 => 22,  75 => 21,  70 => 18,  60 => 14,  55 => 12,  52 => 11,  43 => 9,  39 => 8,  35 => 7,  31 => 6,  27 => 4,  23 => 3,  19 => 1,);
+        return array (  92 => 21,  81 => 22,  79 => 21,  74 => 18,  64 => 14,  59 => 12,  56 => 11,  47 => 9,  43 => 8,  39 => 7,  31 => 6,  27 => 4,  23 => 3,  19 => 1,);
     }
 
     public function getSourceContext()
@@ -110,8 +114,8 @@ class __TwigTemplate_a5d73246d6b075e9226d74abbae119036628796cf682f903a2b6676f124
 \t\t{% for resource in resources %}
 \t\t\t<div class=\"card\" style=\"width: 100%; margin: 10px 0 10px 0\">
 \t\t\t\t<div class=\"card-body\">
-\t\t\t\t\t<h5 class=\"card-title\">{{ resource.name_japanese }}</h5>
-\t\t\t\t\t<h6 class=\"card-subtitle mb-2 text-muted\">{{ resource.name_english }}</h6>
+\t\t\t\t\t<h3 class=\"card-title\"><a href=\"{{ url('/resource/') }}/{{ resource.id }}\">{{ resource.name_japanese }}</a></h3>
+\t\t\t\t\t<h5 class=\"card-subtitle mb-2 text-muted\">{{ resource.name_english }}</h5>
 \t\t\t\t\t{% for category in resource.categories %}
 \t\t\t\t\t<span class=\"badge badge-primary\">{{ category.name_english }}</span>
 \t\t\t\t\t{% endfor %}
