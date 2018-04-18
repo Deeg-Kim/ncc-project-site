@@ -1,0 +1,486 @@
+.====================================================================.
+                                                                      
+ .d8888b.   .o8888b.   db  .d8888b.  d8888b. d88888b d8888b.  .d888b. 
+.8P    Y8. d8P    Y8   88 .8P    Y8. 88  `8D 88'     88  `8D .8P , Y8.
+88      88 8P      oooo88 88      88 88oooY' 88oooo  88oobY' 88  |  88
+88      88 8b      ~~~~88 88      88 88~~~b. 88~~~~  88`8b   88  |/ 88
+`8b    d8' Y8b    d8   88 `8b    d8' 88   8D 88.     88 `88. `8b | d8'
+ `Y8888P'   `Y8888P'   YP  `Y8888P'  Y8888P' Y88888P 88   YD  `Y888P' 
+                                                                      
+`========================== INSTALLATION LOG ========================'
+
+[2018/04/18 06:53:46] Host: Darwin nat-oitwireless-inside-vapornet100-c-15251.Princeton.EDU 16.7.0 Darwin Kernel Version 16.7.0: Mon Nov 13 21:56:25 PST 2017; root:xnu-3789.72.11~1/RELEASE_X86_64 x86_64
+[2018/04/18 06:53:46] PHP version: 7.2.1
+[2018/04/18 06:53:46] Server software: Apache/2.2.34 (Unix) mod_wsgi/3.5 Python/2.7.13 PHP/7.2.1 mod_ssl/2.2.34 OpenSSL/1.0.2j DAV/2 mod_fastcgi/2.4.6 mod_perl/2.0.9 Perl/v5.24.0
+[2018/04/18 06:53:46] Operating system: Darwin
+[2018/04/18 06:53:46] Memory limit: 128M
+[2018/04/18 06:53:46] Max execution time: 3600
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:46] Postback payload: Array
+(
+    [code] => phpVersion
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:46] System check: phpVersion
+[2018/04/18 06:53:46] Requirement phpVersion +OK
+[2018/04/18 06:53:46] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:47] Postback payload: Array
+(
+    [code] => curlLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:47] System check: curlLibrary
+[2018/04/18 06:53:47] Requirement curlLibrary +OK
+[2018/04/18 06:53:47] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:47] Postback payload: Array
+(
+    [code] => liveConnection
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:47] System check: liveConnection
+[2018/04/18 06:53:47] Server request: ping
+[2018/04/18 06:53:47] Request information: Array
+(
+    [url] => http://octobercms.com/api/ping
+    [content_type] => application/json
+    [http_code] => 200
+    [header_size] => 361
+    [request_size] => 171
+    [filetime] => -1
+    [ssl_verify_result] => 0
+    [redirect_count] => 0
+    [total_time] => 0.206872
+    [namelookup_time] => 0.035346
+    [connect_time] => 0.035591
+    [pretransfer_time] => 0.035657
+    [size_upload] => 40
+    [size_download] => 12
+    [speed_download] => 58
+    [speed_upload] => 193
+    [download_content_length] => 12
+    [upload_content_length] => 40
+    [starttransfer_time] => 0.206828
+    [redirect_time] => 0
+    [redirect_url] => 
+    [primary_ip] => 104.24.113.12
+    [certinfo] => Array
+        (
+        )
+
+    [primary_port] => 80
+    [local_ip] => 127.0.0.1
+    [local_port] => 56593
+)
+
+[2018/04/18 06:53:47] Requirement liveConnection +OK
+[2018/04/18 06:53:47] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:48] Postback payload: Array
+(
+    [code] => writePermission
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:48] System check: writePermission
+[2018/04/18 06:53:48] Requirement writePermission +OK
+[2018/04/18 06:53:48] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:49] Postback payload: Array
+(
+    [code] => pdoLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:49] System check: pdoLibrary
+[2018/04/18 06:53:49] Requirement pdoLibrary +OK
+[2018/04/18 06:53:49] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:49] Postback payload: Array
+(
+    [code] => mbstringLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:49] System check: mbstringLibrary
+[2018/04/18 06:53:49] Requirement mbstringLibrary +OK
+[2018/04/18 06:53:49] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:50] Postback payload: Array
+(
+    [code] => sslLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:50] System check: sslLibrary
+[2018/04/18 06:53:50] Requirement sslLibrary +OK
+[2018/04/18 06:53:50] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:50] Postback payload: Array
+(
+    [code] => zipLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:50] System check: zipLibrary
+[2018/04/18 06:53:50] Requirement zipLibrary +OK
+[2018/04/18 06:53:50] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:53:51] Postback payload: Array
+(
+    [code] => gdLibrary
+    [handler] => onCheckRequirement
+)
+
+[2018/04/18 06:53:51] System check: gdLibrary
+[2018/04/18 06:53:51] Requirement gdLibrary +OK
+[2018/04/18 06:53:51] Execute handler (onCheckRequirement): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:27] Postback payload: Array
+(
+    [db_type] => mysql
+    [db_host] => localhost
+    [db_port] => 
+    [db_name] => ncc_project_site
+    [db_user] => root
+    [db_pass] => *******
+    [admin_first_name] => DG
+    [admin_last_name] => Kim
+    [admin_email] => *******@*****.com
+    [admin_login] => dgkim
+    [admin_password] => *******
+    [admin_confirm_password] => *******
+    [backend_uri] => /backend
+    [encryption_code] => *******
+    [file_mask] => 777
+    [folder_mask] => 777
+    [handler] => onValidateDatabase
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:27] Postback payload: Array
+(
+    [db_type] => mysql
+    [db_host] => localhost
+    [db_port] => 
+    [db_name] => ncc_project_site
+    [db_user] => root
+    [db_pass] => *******
+    [admin_first_name] => DG
+    [admin_last_name] => Kim
+    [admin_email] => *******@*****.com
+    [admin_login] => dgkim
+    [admin_password] => *******
+    [admin_confirm_password] => *******
+    [backend_uri] => /backend
+    [encryption_code] => *******
+    [file_mask] => 777
+    [folder_mask] => 777
+    [handler] => onValidateAdminAccount
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:27] Postback payload: Array
+(
+    [db_type] => mysql
+    [db_host] => localhost
+    [db_port] => 
+    [db_name] => ncc_project_site
+    [db_user] => root
+    [db_pass] => *******
+    [admin_first_name] => DG
+    [admin_last_name] => Kim
+    [admin_email] => *******@*****.com
+    [admin_login] => dgkim
+    [admin_password] => *******
+    [admin_confirm_password] => *******
+    [backend_uri] => /backend
+    [encryption_code] => *******
+    [file_mask] => 777
+    [folder_mask] => 777
+    [handler] => onValidateAdvancedConfig
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:29] Postback payload: Array
+(
+    [step] => getMetaData
+    [meta] => 
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:29] Install step: getMetaData
+[2018/04/18 06:55:29] Server request: core/install
+[2018/04/18 06:55:29] Request information: Array
+(
+    [url] => http://octobercms.com/api/core/install
+    [content_type] => application/json
+    [http_code] => 200
+    [header_size] => 362
+    [request_size] => 179
+    [filetime] => -1
+    [ssl_verify_result] => 0
+    [redirect_count] => 0
+    [total_time] => 0.298601
+    [namelookup_time] => 0.001473
+    [connect_time] => 0.001648
+    [pretransfer_time] => 0.001695
+    [size_upload] => 40
+    [size_download] => 132
+    [speed_download] => 442
+    [speed_upload] => 133
+    [download_content_length] => 132
+    [upload_content_length] => 40
+    [starttransfer_time] => 0.298576
+    [redirect_time] => 0
+    [redirect_url] => 
+    [primary_ip] => 104.24.113.12
+    [certinfo] => Array
+        (
+        )
+
+    [primary_port] => 80
+    [local_ip] => 127.0.0.1
+    [local_port] => 56654
+)
+
+[2018/04/18 06:55:29] Step getMetaData +OK
+[2018/04/18 06:55:29] Execute handler (onInstallStep): Array
+(
+    [result] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+            [plugins] => Array
+                (
+                )
+
+            [themes] => Array
+                (
+                )
+
+        )
+
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:30] Postback payload: Array
+(
+    [step] => downloadCore
+    [meta] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+        )
+
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:30] Install step: downloadCore
+[2018/04/18 06:55:33] Saving to file (core): /Users/DG/Documents/Etc/NCC/project-website/install_files/temp/a74ad8dfacd4f985eb3977517615ce25.arc
+[2018/04/18 06:55:33] Step downloadCore +OK
+[2018/04/18 06:55:33] Execute handler (onInstallStep): Array
+(
+    [result] => 
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:33] Postback payload: Array
+(
+    [step] => extractCore
+    [meta] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+        )
+
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:33] Install step: extractCore
+[2018/04/18 06:55:33] Extracting file (core): a74ad8dfacd4f985eb3977517615ce25.arc
+[2018/04/18 06:55:40] Step extractCore +OK
+[2018/04/18 06:55:40] Execute handler (onInstallStep): Array
+(
+    [result] => 1
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:40] Postback payload: Array
+(
+    [step] => setupConfig
+    [meta] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+        )
+
+    [db_type] => mysql
+    [db_host] => localhost
+    [db_port] => 
+    [db_name] => ncc_project_site
+    [db_user] => root
+    [db_pass] => *******
+    [admin_first_name] => DG
+    [admin_last_name] => Kim
+    [admin_email] => *******@*****.com
+    [admin_login] => dgkim
+    [admin_password] => *******
+    [admin_confirm_password] => *******
+    [backend_uri] => /backend
+    [encryption_code] => *******
+    [file_mask] => 777
+    [folder_mask] => 777
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:40] Install step: setupConfig
+[2018/04/18 06:55:40] Step setupConfig +OK
+[2018/04/18 06:55:40] Execute handler (onInstallStep): Array
+(
+    [result] => 
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:41] Postback payload: Array
+(
+    [step] => createAdmin
+    [meta] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+        )
+
+    [db_type] => mysql
+    [db_host] => localhost
+    [db_port] => 
+    [db_name] => ncc_project_site
+    [db_user] => root
+    [db_pass] => *******
+    [admin_first_name] => DG
+    [admin_last_name] => Kim
+    [admin_email] => *******@*****.com
+    [admin_login] => dgkim
+    [admin_password] => *******
+    [admin_confirm_password] => *******
+    [backend_uri] => /backend
+    [encryption_code] => *******
+    [file_mask] => 777
+    [folder_mask] => 777
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:41] Install step: createAdmin
+[2018/04/18 06:55:42] Step createAdmin +OK
+[2018/04/18 06:55:42] Execute handler (onInstallStep): Array
+(
+    [result] => 
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:42] Postback payload: Array
+(
+    [disableLog] => 1
+)
+
+[2018/04/18 06:55:42] Install step: setupProject
+[2018/04/18 06:55:42] Step setupProject +OK
+[2018/04/18 06:55:42] Execute handler (onInstallStep): Array
+(
+    [result] => 
+)
+
+.============================ POST REQUEST ==========================.
+[2018/04/18 06:55:43] Postback payload: Array
+(
+    [step] => finishInstall
+    [meta] => Array
+        (
+            [core] => Array
+                (
+                    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+                    [build] => 434
+                    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+                )
+
+        )
+
+    [hash] => 0495b4f0b4f42cccdd3e9b3424235517
+    [build] => 434
+    [uhash] => eb0dccd7698b8d533b4758b812ea10ad
+    [handler] => onInstallStep
+)
+
+[2018/04/18 06:55:43] Install step: finishInstall
+[2018/04/18 06:55:43] Cleaning up file: a74ad8dfacd4f985eb3977517615ce25.arc
+[2018/04/18 06:55:43] Step finishInstall +OK
+[2018/04/18 06:55:43] Execute handler (onInstallStep): Array
+(
+    [result] => 
+)
+

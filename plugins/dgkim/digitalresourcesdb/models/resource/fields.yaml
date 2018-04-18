@@ -1,0 +1,36 @@
+fields:
+    name_japanese:
+        label: 'Resource Name (Japanese)'
+        span: auto
+        required: 1
+        type: text
+    name_english:
+        label: 'Resource Name (English)'
+        span: auto
+        required: 1
+        type: text
+    link:
+        label: 'Resource URL'
+        span: full
+        required: 1
+        type: text
+    categories:
+        label: Categories
+        oc.commentPosition: ''
+        nameFrom: name_english
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    keywords:
+        label: Keywords
+        span: full
+        required: 1
+        type: text
+        comment: 'Separate all keywords by commas'
+    description:
+        label: 'Description of Resource'
+        size: large
+        span: full
+        required: 1
+        type: richeditor

@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table dgkim_digitalresourcesdb_categories'
+    - builder_table_create_dgkim_digitalresourcesdb_categories.php
+1.0.3:
+    - 'Created table dgkim_digitalresourcesdb_resources'
+    - builder_table_create_dgkim_digitalresourcesdb_resources.php
+1.0.4:
+    - 'Created table dgkim_digitalresourcesdb_category_resource'
+    - builder_table_create_dgkim_digitalresourcesdb_category_resource.php

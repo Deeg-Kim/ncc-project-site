@@ -1,0 +1,16 @@
+columns:
+    name_english:
+        label: 'Resource Name (English)'
+        type: text
+        searchable: true
+        sortable: true
+    name_japanese:
+        label: 'Resource Name (Japanese)'
+        type: text
+        searchable: true
+        sortable: true
+    link:
+        label: 'Resource Link'
+        type: text
+        searchable: true
+        sortable: true

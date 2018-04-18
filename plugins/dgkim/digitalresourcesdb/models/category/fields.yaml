@@ -1,0 +1,11 @@
+fields:
+    name_english:
+        label: 'Category Name (English)'
+        span: full
+        required: 1
+        type: text
+    name_japanese:
+        label: 'Category Name (Japanese)'
+        span: full
+        required: 1
+        type: text

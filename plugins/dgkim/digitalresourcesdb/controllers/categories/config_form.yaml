@@ -1,0 +1,10 @@
+name: Categories
+form: $/dgkim/digitalresourcesdb/models/category/fields.yaml
+modelClass: Dgkim\DigitalResourcesDb\Models\Category
+defaultRedirect: dgkim/digitalresourcesdb/categories
+create:
+    redirect: 'dgkim/digitalresourcesdb/categories/update/:id'
+    redirectClose: dgkim/digitalresourcesdb/categories
+update:
+    redirect: dgkim/digitalresourcesdb/categories
+    redirectClose: dgkim/digitalresourcesdb/categories

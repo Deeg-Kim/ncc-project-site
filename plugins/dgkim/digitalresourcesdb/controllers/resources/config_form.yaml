@@ -1,0 +1,10 @@
+name: Resources
+form: $/dgkim/digitalresourcesdb/models/resource/fields.yaml
+modelClass: Dgkim\DigitalResourcesDb\Models\Resource
+defaultRedirect: dgkim/digitalresourcesdb/resources
+create:
+    redirect: 'dgkim/digitalresourcesdb/resources/update/:id'
+    redirectClose: dgkim/digitalresourcesdb/resources
+update:
+    redirect: dgkim/digitalresourcesdb/resources
+    redirectClose: dgkim/digitalresourcesdb/resources

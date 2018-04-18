@@ -1,0 +1,20 @@
+plugin:
+    name: 'dgkim.digitalresourcesdb::lang.plugin.name'
+    description: 'dgkim.digitalresourcesdb::lang.plugin.description'
+    author: dgkim
+    icon: oc-icon-database
+    homepage: ''
+navigation:
+    main-menu-item-drdb:
+        label: 'Resource Database'
+        url: dgkim/digitalresourcesdb/resources
+        icon: icon-database
+        sideMenu:
+            side-menu-item-resources:
+                label: Resources
+                url: dgkim/digitalresourcesdb/resources
+                icon: icon-book
+            side-menu-item-cat:
+                label: Categories
+                url: dgkim/digitalresourcesdb/categories
+                icon: icon-sitemap
