@@ -1,20 +1,41 @@
 <div class="row">
 	<div class="col-md-8 offset-md-2">
-		{% for resource in resources %}
-			<div class="card" style="width: 100%; margin: 10px 0 10px 0">
-				<div class="card-body">
-					<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h3>
-					<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
-					{% for category in resource.categories %}
-					<span class="badge badge-primary">{{ category.name_english }}</span>
-					{% endfor %}
-					<p>
-						<a href="#" class="card-link">{{ resource.link }}</a>
-					</p>
-					<p class="card-text">{{ resource.description|raw }}</p>
-			  	</div>
+		<div style="width: 100%; height: 20px;"></div>
+		<form data-request="onFilter" data-request-update="resourcelist: '#resourceList'">
+			<div class="form-group">
+				<input type="text" class="form-control" name="search" style="margin-bottom: 10px;" placeholder="Search digital resource database...">
 			</div>
-		{% endfor %}
+			<div class="form-group">
+				<input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title">Resource Title</label>
+				<input type="checkbox" name="searchType[]" value="keywords" id="check-keywords" checked> <label class="form-check-label" for="check-keywords">Keywords</label>
+				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description">Resource Description</label>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Search</button> <input type="reset" value="Clear" class="btn btn-danger">
+			</div>
+		</form>
+		
+		<div id="resourceList">
+			{% if resources|length %}
+			{% for resource in resources %}
+				<div class="card" style="width: 100%; margin: 20px 0 20px 0">
+					<div class="card-body">
+						<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h3>
+						<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
+						{% for category in resource.categories %}
+						<span class="badge badge-primary">{{ category.name_english }}</span>
+						{% endfor %}
+						<p>
+							<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">Broken Link</a>{% endif %}
+						</p>
+						<p class="card-text">{{ resource.description|raw }}</p>
+					</div>
+				</div>
+			{% endfor %}
+			{% else %}
+			<h2 class="text-center">No resources found!</h2>
+			{% endif %}
+		</div>
 	</div>
 </div>
 
@@ -27,5 +48,25 @@
 	.card-text {
 		font-size: 0.9em;
 	}
+	
+	.broken:link {
+		color: white;
+	}
+	
+	.broken:hover {
+		color: white;
+		cursor: pointer;
+		text-decoration: none;
+	}
 </style>
+{% endput %}
+
+{% put scripts %}
+<script>
+	$(function () {
+		$('.broken').popover({
+			trigger: 'focus'
+	  	})
+	})
+</script>
 {% endput %}

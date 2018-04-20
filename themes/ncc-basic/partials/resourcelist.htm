@@ -1,0 +1,23 @@
+description = "Resource list partial"
+==
+<div id="resourceList">
+	{% if resources|length %}
+	{% for resource in resources %}
+		<div class="card" style="width: 100%; margin: 20px 0 20px 0">
+			<div class="card-body">
+				<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h3>
+				<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
+				{% for category in resource.categories %}
+				<span class="badge badge-primary">{{ category.name_english }}</span>
+				{% endfor %}
+				<p>
+					<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">Broken Link</a>{% endif %}
+				</p>
+				<p class="card-text">{{ resource.description|raw }}</p>
+			</div>
+		</div>
+	{% endfor %}
+	{% else %}
+	<h2 class="text-center">No resources found!</h2>
+	{% endif %}
+</div>
