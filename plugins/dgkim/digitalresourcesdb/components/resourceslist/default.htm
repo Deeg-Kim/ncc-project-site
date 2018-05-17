@@ -6,9 +6,15 @@
 				<input type="text" class="form-control" name="search" style="margin-bottom: 10px;" placeholder="Search digital resource database...">
 			</div>
 			<div class="form-group">
-				<input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title">Resource Title</label>
+				Search fields: <input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title">Resource Title</label>
 				<input type="checkbox" name="searchType[]" value="keywords" id="check-keywords" checked> <label class="form-check-label" for="check-keywords">Keywords</label>
 				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description">Resource Description</label>
+			</div>
+			<div class="form-group">
+				Include category: 
+				{% for c in categories %}
+				<input type="checkbox" name="categoryFilter[]" value="{{ c.id }}" id="check-{{ c.id }}" checked> <label class="form-check-label" for="check-{{ c.id }}">{{ c.name_english }}</label>
+				{% endfor %}
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Search</button> <input type="reset" value="Clear" class="btn btn-danger">
@@ -26,7 +32,7 @@
 						<span class="badge badge-primary">{{ category.name_english }}</span>
 						{% endfor %}
 						<p>
-							<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">Broken Link</a>{% endif %}
+							<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 						</p>
 						<p class="card-text">{{ resource.description|raw }}</p>
 					</div>
