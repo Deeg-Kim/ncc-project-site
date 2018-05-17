@@ -7,6 +7,7 @@ use Redirect;
 use Flash;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
+use Dgkim\DigitalResourcesDb\Models\Category;
 use Dgkim\DigitalResourcesDb\Models\Resource;
 
 class ResourcesList extends \Cms\Classes\ComponentBase
@@ -43,15 +44,23 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			return false;
 		}
 		
+		$categories = Category::get();
+		
         $words = post('search');
 		$words = explode(' ', $words);
 		$words = array_map('strtolower', $words);
 		$searchType = post('searchType');
+		$categoryFilter = post('categoryFilter');
+		
+		if (empty($categoryFilter)) {
+			$categoryFilter = [];
+		}
 		
 		$resources = Resource::get();
 		$resourceArray = [];
 		
 		foreach ($resources as $resource) {
+				
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $resource->link);
 			curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -72,45 +81,59 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			
 			$attributes['categories'] = $resource->categories;
 			
-			if (empty($searchType)) {
-				$resourceArray[] = $attributes;
-			} elseif($words[0] == "") {
-				$resourceArray[] = $attributes;
-			} else {
+			$categoryIds = [];
+			
+			foreach ($attributes['categories'] as $c) {
+				$categoryIds[] = $c->attributes['id'];
+			}
+			
+			// add if in category
+			if (!empty(array_intersect($categoryIds, $categoryFilter)) || empty($categoryFilter)) {
 				
-				$added = false;
-				if (in_array("title", $searchType) && $added == false) {
-					$english = explode(' ', $attributes['name_english']);
-					$english = array_map('strtolower', $english);
-					
-					if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english))) {
-						$resourceArray[] = $attributes;
-						$added = true;
+				// perform search on text input and on search fields
+				if (empty($searchType)) {
+					$resourceArray[] = $attributes;
+				} elseif($words[0] == "") {
+					$resourceArray[] = $attributes;
+				} else {
+
+					$added = false;
+
+					if (in_array("title", $searchType) && $added == false) {
+						$english = explode(' ', $attributes['name_english']);
+						$english = array_map('strtolower', $english);
+
+						if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english))) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
 					}
-				}
-				
-				if (in_array("keywords", $searchType) && $added == false) {
-					$keywords = explode(',', $attributes['keywords']);
-					$keywords = array_map('strtolower', $keywords);
-					
-					if(!empty(array_intersect($keywords, $words))) {
-						$resourceArray[] = $attributes;
-						$added = true;
+
+					if (in_array("keywords", $searchType) && $added == false) {
+						$keywords = explode(',', $attributes['keywords']);
+						$keywords = array_map('strtolower', $keywords);
+
+						if(!empty(array_intersect($keywords, $words))) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
 					}
-				}
-				
-				if (in_array("description", $searchType) && $added == false) {
-					$description = strip_tags(strtolower($attributes['description']));
-					$flag = array_strpos($description, $words);
-					
-					if ($flag) {
-						$resourceArray[] = $attributes;
-						$added = true;
+
+					if (in_array("description", $searchType) && $added == false) {
+						$description = strip_tags(strtolower($attributes['description']));
+						$flag = array_strpos($description, $words);
+
+						if ($flag) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
 					}
+					
 				}
 			}
 		}
 		
+		$this->page['categories'] = $categories;
 		$this->page['resources'] = $resourceArray;
     }
 }
