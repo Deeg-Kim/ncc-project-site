@@ -52,11 +52,21 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$searchType = post('searchType');
 		$categoryFilter = post('categoryFilter');
 		
+		$alpha = get('page');
+		
+		if ($alpha == null) {
+			$alpha = 'A';
+		}
+		
 		if (empty($categoryFilter)) {
 			$categoryFilter = [];
 		}
 		
-		$resources = Resource::get();
+		if (!empty($words[0])) {
+			$resources = Resource::orderBy('name_romanization')->get();
+		} else {
+			$resources = Resource::where('name_romanization', 'like', $alpha . '%')->orderBy('name_romanization')->get();
+		}
 		$resourceArray = [];
 		
 		foreach ($resources as $resource) {
@@ -102,8 +112,11 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 					if (in_array("title", $searchType) && $added == false) {
 						$english = explode(' ', $attributes['name_english']);
 						$english = array_map('strtolower', $english);
+						
+						$romanized = explode(' ', $attributes['name_romanization']);
+						$romanized = array_map('strtolower', $romanized);
 
-						if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english))) {
+						if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english)) || !empty(array_intersect($words, $romanized))) {
 							$resourceArray[] = $attributes;
 							$added = true;
 						}
@@ -133,6 +146,33 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			}
 		}
 		
+		$ab = range('A', 'Z');
+		$pagination = [];
+		
+		foreach ($ab as $a) {
+			$resources = Resource::where('name_romanization', 'like', $a . '%')->get();
+			$c = count($resources);
+			
+			if ($c == 0) {
+				$has = 0;
+			} else {
+				$has = 1;
+			}
+			
+			if ($a == $alpha) {
+				$active = 1;
+			} else {
+				$active = 0;
+			}
+			
+			$pagination[] = array(
+				'letter'	=> $a,
+				'has'		=> $has,
+				'active'	=> $active
+			);
+		}
+		
+		$this->page['pagination'] = $pagination;
 		$this->page['categories'] = $categories;
 		$this->page['resources'] = $resourceArray;
     }

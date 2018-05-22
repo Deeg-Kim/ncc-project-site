@@ -10,11 +10,40 @@
 				<span class="badge badge-primary">{{ category.name_english }}</span>
 				{% endfor %}
 				<p>
-					<a href="#" class="card-link">{{ resource.link }}</a>
+					<a href="#" class="card-link">{{ resource.link }}</a> {% if broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 				</p>
-				<p class="card-text">{{ resource.description|raw }}</p>
+				<p class="card-text">
+					<div class="row">
+						<div class="col-6" style="border-right: 1px black solid;">{{ resource.description|raw }}</div>
+						<div class="col-6">{{ resource.description_japanese|raw }}</div>
+					</div>
+				</p>
 				<p class="card-text"><b>Keywords:</b> {{ resource.keywords }}</p>
 		  	</div>
 		</div>
 	</div>
 </div>
+
+{% put styles %}
+<style>
+	.broken:link {
+		color: white;
+	}
+	
+	.broken:hover {
+		color: white;
+		cursor: pointer;
+		text-decoration: none;
+	}
+</style>
+{% endput %}
+
+{% put scripts %}
+<script>
+	$(function () {
+		$('.broken').popover({
+			trigger: 'focus'
+	  	})
+	})
+</script>
+{% endput %}

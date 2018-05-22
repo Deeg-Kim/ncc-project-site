@@ -1,11 +1,11 @@
 columns:
-    name_english:
-        label: 'Category (English)'
+    name_japanese:
+        label: 'Category (Japanese)'
         type: text
         searchable: true
         sortable: true
-    name_japanese:
-        label: 'Category (Japanese)'
+    name_english:
+        label: 'Category (English)'
         type: text
         searchable: true
         sortable: true

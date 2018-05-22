@@ -4,10 +4,15 @@ fields:
         span: auto
         required: 1
         type: text
-    name_english:
-        label: 'Resource Name (English)'
+    name_romanization:
+        label: 'Resource Name (Romanized)'
         span: auto
         required: 1
+        type: text
+    name_english:
+        label: 'Resource Name (English Translation)'
+        span: auto
+        required: 0
         type: text
     link:
         label: 'Resource URL'
@@ -29,7 +34,13 @@ fields:
         type: text
         comment: 'Separate all keywords by commas'
     description:
-        label: 'Description of Resource'
+        label: 'Description of Resource (English)'
+        size: large
+        span: full
+        required: 1
+        type: richeditor
+    description_japanese:
+        label: 'Description of Resource (Japanese)'
         size: large
         span: full
         required: 1

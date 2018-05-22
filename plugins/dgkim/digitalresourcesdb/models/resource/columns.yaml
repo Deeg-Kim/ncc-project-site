@@ -1,11 +1,16 @@
 columns:
-    name_english:
-        label: 'Resource Name (English)'
+    name_japanese:
+        label: 'Resource Name (Japanese)'
         type: text
         searchable: true
         sortable: true
-    name_japanese:
-        label: 'Resource Name (Japanese)'
+    name_romanization:
+        label: 'Resource Name (Romanized)'
+        type: text
+        searchable: true
+        sortable: true
+    name_english:
+        label: 'Resource Name (English)'
         type: text
         searchable: true
         sortable: true

@@ -9,3 +9,6 @@
 1.0.4:
     - 'Created table dgkim_digitalresourcesdb_category_resource'
     - builder_table_create_dgkim_digitalresourcesdb_category_resource.php
+1.0.5:
+    - 'Updated table dgkim_digitalresourcesdb_resources'
+    - builder_table_update_dgkim_digitalresourcesdb_resources.php
