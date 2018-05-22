@@ -45,6 +45,7 @@ class ResourceView extends \Cms\Classes\ComponentBase
 			$broken = 1;
 		}
 		
+		$this->page['resource'] = $resource;
 		$this->page['broken'] = $broken;
 	}
 }
