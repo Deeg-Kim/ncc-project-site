@@ -62,7 +62,10 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			$categoryFilter = [];
 		}
 		
-		if (!empty($words[0])) {
+		$categoryCount = count($categories);
+		$filterCount = count($categoryFilter);
+		
+		if (!empty($words[0]) || (($filterCount != 0) && ($categoryCount != $filterCount))) {
 			$resources = Resource::orderBy('name_romanization')->get();
 		} else {
 			$resources = Resource::where('name_romanization', 'like', $alpha . '%')->orderBy('name_romanization')->get();
