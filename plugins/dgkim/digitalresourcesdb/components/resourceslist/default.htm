@@ -73,7 +73,7 @@
 							</div>
 						<div class="row">
 							<div class="col-12">
-							<a href="{{ url('/resource/') }}/{{ resource.id }}">Read More...</a>
+							<a href="{{ url('/resource/') }}/{{ resource.id }}" class="read-more">Read More...</a>
 							</div>
 						</div>
 						</p>
@@ -161,6 +161,10 @@
 			} else {
 				$('#main-search').attr("placeholder", "Search digital resource database...");
 			}
+			
+			$(".read-more").text(function(i, text) {
+				return text === "Read More..." ? "続きを読む..." : "Read More...";
+			})
 			
 			{% for c in categories %}
 			$("#label-{{ c.id }}").text(function(i, text) {
