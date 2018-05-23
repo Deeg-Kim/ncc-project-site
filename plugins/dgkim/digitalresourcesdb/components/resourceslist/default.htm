@@ -5,21 +5,21 @@
 		<div style="width: 100%; height: 5px;"></div>
 		<form data-request="onFilter" data-request-update="resourcelist: '#resourceList'">
 			<div class="form-group">
-				<input type="text" class="form-control" name="search" style="margin-bottom: 10px;" placeholder="Search digital resource database...">
+				<input type="text" class="form-control" name="search" style="margin-bottom: 10px;" placeholder="Search digital resource database..." id="main-search">
 			</div>
 			<div class="form-group">
-				Search fields: <input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title">Resource Title</label>
-				<input type="checkbox" name="searchType[]" value="keywords" id="check-keywords" checked> <label class="form-check-label" for="check-keywords">Keywords</label>
-				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description">Resource Description</label>
+				<span id="search-fields">Search fields</span>: <input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title" id="resource-title">Resource Title</label>
+				<input type="checkbox" name="searchType[]" value="keywords" id="check-keywords" checked> <label class="form-check-label" for="check-keywords" id="keywords">Keywords</label>
+				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description" id="resource-description">Resource Description</label>
 			</div>
 			<div class="form-group">
-				Include category: 
+				<span id="include-category">Include category</span>:
 				{% for c in categories %}
-				<input type="checkbox" name="categoryFilter[]" value="{{ c.id }}" id="check-{{ c.id }}" checked> <label class="form-check-label" for="check-{{ c.id }}">{{ c.name_english }}</label>
+				<input type="checkbox" name="categoryFilter[]" value="{{ c.id }}" id="check-{{ c.id }}" checked> <label class="form-check-label" for="check-{{ c.id }}" id="label-{{ c.id }}">{{ c.name_english }}</label>
 				{% endfor %}
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Search</button> <input type="reset" id="reset" value="Clear" class="btn btn-danger">
+				<button type="submit" class="btn btn-primary" id="submit">Search</button> <input type="reset" id="reset" value="Clear" class="btn btn-danger">
 			</div>
 		</form>
 		
@@ -58,7 +58,7 @@
 			{% for resource in resources %}
 				<div class="card" style="width: 100%; margin: 20px 0 20px 0">
 					<div class="card-body">
-						<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h3>
+						<h3 class="card-title">{{ resource.name_japanese }} | {{ resource.name_romanization }}</h3>
 						<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
 						{% for category in resource.categories %}
 						<span class="badge badge-primary">{{ category.name_english }}</span>
@@ -71,6 +71,11 @@
 								<div class="col-6" style="border-right: 1px black solid;">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
 								<div class="col-6">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
 							</div>
+						<div class="row">
+							<div class="col-12">
+							<a href="{{ url('/resource/') }}/{{ resource.id }}">Read More...</a>
+							</div>
+						</div>
 						</p>
 						<p class="card-text"><b>Keywords:</b> {{ resource.keywords }}</p>
 					</div>
@@ -120,16 +125,48 @@
 			trigger: 'focus'
 	  	})
 		
-		$( "#reset" ).click(function() {
+		$("#reset").click(function() {
 			$.request('onFilter', {
 				update: {resourcelist: '#resourceList'}
 			})
 		})
 		
 		$(".translate").click(function () {
-			  $(this).text(function(i, text){
-				  return text === "日本語で表示" ? "Display in English" : "日本語で表示";
-			  })
+			$(this).text(function(i, text) {
+				return text === "日本語で表示" ? "Display in English" : "日本語で表示";
+			})
+			
+			$("#search-fields").text(function(i, text) {
+				return text === "Search fields" ? "検索フィールド" : "Search fields";
+			})
+			
+			$("#resource-title").text(function(i, text) {
+				return text === "Resource Title" ? "資料名" : "Resource Title";
+			})
+			
+			$("#keywords").text(function(i, text) {
+				return text === "Keywords" ? "キーワード" : "Keywords";
+			})	
+			
+			$("#resource-description").text(function(i, text) {
+				return text === "Resource Description" ? "資料内容" : "Resource Description";
+			})
+			
+			$("#include-category").text(function(i, text) {
+				return text === "Include category" ? "分野" : "Include category";
+			})
+			
+			if ($('#main-search').attr("placeholder") == "Search digital resource database...") {
+				$('#main-search').attr("placeholder", "データベースを検索...");
+			} else {
+				$('#main-search').attr("placeholder", "Search digital resource database...");
+			}
+			
+			{% for c in categories %}
+			$("#label-{{ c.id }}").text(function(i, text) {
+				return text === "{{ c.name_english }}" ? "{{ c.name_japanese }}" : "{{ c.name_english }}";
+			})
+			{% endfor %}
 	   });
 	})
 </script>
