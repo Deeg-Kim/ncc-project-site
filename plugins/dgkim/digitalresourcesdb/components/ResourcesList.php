@@ -143,6 +143,16 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 							$resourceArray[] = $attributes;
 							$added = true;
 						}
+						
+						if ($added == false) {
+							$description_japanese = strip_tags($attributes['description_japanese']);
+							$flag_jap = array_strpos($description_japanese, $words);
+
+							if ($flag_jap) {
+								$resourceArray[] = $attributes;
+								$added = true;
+							}
+						}
 					}
 					
 				}

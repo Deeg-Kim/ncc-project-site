@@ -36,18 +36,23 @@ description = "Resource list partial"
 	{% for resource in resources %}
 		<div class="card" style="width: 100%; margin: 20px 0 20px 0">
 			<div class="card-body">
-				<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h3>
+				<h3 class="card-title">{{ resource.name_japanese }} | {{ resource.name_romanization }}</h3>
 				<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
 				{% for category in resource.categories %}
 				<span class="badge badge-primary">{{ category.name_english }}</span>
 				{% endfor %}
 				<p>
-					<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
+					<a href="{{ resource.link }}" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 				</p>
 				<p class="card-text">
 					<div class="row">
-						<div class="col-6" style="border-right: 1px black solid;">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
-						<div class="col-6">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+						<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+						<div class="col-6">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+						<a href="{{ url('/resource/') }}/{{ resource.id }}" class="read-more">Read More...</a>
+						</div>
 					</div>
 				</p>
 				<p class="card-text"><b>Keywords:</b> {{ resource.keywords }}</p>

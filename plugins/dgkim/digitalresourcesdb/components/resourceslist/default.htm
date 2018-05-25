@@ -64,12 +64,12 @@
 						<span class="badge badge-primary">{{ category.name_english }}</span>
 						{% endfor %}
 						<p>
-							<a href="#" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
+							<a href="{{ resource.link }}" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 						</p>
 						<p class="card-text">
 							<div class="row">
-								<div class="col-6" style="border-right: 1px black solid;">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
-								<div class="col-6">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+								<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+								<div class="col-6">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
 							</div>
 						<div class="row">
 							<div class="col-12">
