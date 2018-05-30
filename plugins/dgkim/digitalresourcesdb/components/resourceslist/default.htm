@@ -1,16 +1,16 @@
 <div class="row">
 	<div class="col-md-8 offset-md-2">
 		<div style="width: 100%; height: 20px;"></div>
-		<button style="font-size: 10px; padding: 3px;" class="btn btn-dark translate">日本語で表示</button>
+		<!-- <button style="font-size: 10px; padding: 3px;" class="btn btn-dark translate">日本語で表示</button> -->
 		<div style="width: 100%; height: 5px;"></div>
 		<form data-request="onFilter" data-request-update="resourcelist: '#resourceList'">
 			<div class="form-group">
 				<input type="text" class="form-control" name="search" style="margin-bottom: 10px;" placeholder="Search digital resource database..." id="main-search">
 			</div>
 			<div class="form-group">
-				<span id="search-fields">Search fields</span>: <input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title" id="resource-title">Resource Title</label>
+				<span id="search-fields">Search fields</span>: <input type="checkbox" name="searchType[]" value="title" id="check-title" checked> <label class="form-check-label" for="check-title" id="resource-title">Title</label>
 				<input type="checkbox" name="searchType[]" value="keywords" id="check-keywords" checked> <label class="form-check-label" for="check-keywords" id="keywords">Keywords</label>
-				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description" id="resource-description">Resource Description</label>
+				<input type="checkbox" name="searchType[]" value="description" id="check-description"> <label class="form-check-label" for="check-description" id="resource-description">Description</label>
 			</div>
 			<div class="form-group">
 				<span id="include-category">Include category</span>:
@@ -58,26 +58,24 @@
 			{% for resource in resources %}
 				<div class="card" style="width: 100%; margin: 20px 0 20px 0">
 					<div class="card-body">
-						<h3 class="card-title">{{ resource.name_japanese }} | {{ resource.name_romanization }}</h3>
+						<h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}" target="_blank">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h3>
 						<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
 						{% for category in resource.categories %}
 						<span class="badge badge-primary">{{ category.name_english }}</span>
 						{% endfor %}
 						<p>
-							<a href="{{ resource.link }}" class="card-link">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
+							<a href="{{ resource.link }}" class="card-link" target="_blank">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 						</p>
 						<p class="card-text">
 							<div class="row">
-								<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
-								<div class="col-6">{{ resource.description|striptags|length > 200 ? resource.description|striptags|slice(0, 200) ~ '...' : resource.description|striptags }}</div>
+								{% if resource.description is not empty %}
+								<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese|striptags|length > 70 ? resource.description_japanese|striptags|slice(0, 70) ~ '...' : resource.description_japanese|striptags }}</div>
+								<div class="col-6">{{ resource.description|striptags|length > 150 ? resource.description|striptags|slice(0, 150) ~ '...' : resource.description|striptags }}</div>
+								{% else %}
+								<div class="col-12">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+								{% endif %}
 							</div>
-						<div class="row">
-							<div class="col-12">
-							<a href="{{ url('/resource/') }}/{{ resource.id }}" class="read-more">Read More...</a>
-							</div>
-						</div>
 						</p>
-						<p class="card-text"><b>Keywords:</b> {{ resource.keywords }}</p>
 					</div>
 				</div>
 			{% endfor %}

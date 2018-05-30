@@ -22,9 +22,8 @@ class Resource extends Model
 		'name_japanese'			=> 'required',
 		'name_romanization'		=> 'required',
 		'link'					=> 'required',
-		'description'			=> 'required',
 		'description_japanese'	=> 'required',
-		'keywords'				=> 'required'
+		'keywords'				=> 'required',
     ];
 
     /**
