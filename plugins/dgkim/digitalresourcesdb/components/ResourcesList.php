@@ -51,6 +51,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$words = array_map('strtolower', $words);
 		$searchType = post('searchType');
 		$categoryFilter = post('categoryFilter');
+		$countSet = false;
 		
 		$alpha = get('page');
 		
@@ -69,6 +70,8 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			$resources = Resource::orderBy('name_romanization')->get();
 		} else {
 			$resources = Resource::where('name_romanization', 'like', $alpha . '%')->orderBy('name_romanization')->get();
+			$this->page['resourceCount'] = count(Resource::orderBy('name_romanization')->get());
+			$countSet = true;
 		}
 		$resourceArray = [];
 		
@@ -113,16 +116,41 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 					$added = false;
 
 					if (in_array("title", $searchType) && $added == false) {
+						// old search functionality
+						/*
 						$english = explode(' ', $attributes['name_english']);
 						$english = array_map('strtolower', $english);
 						
 						$romanized = explode(' ', $attributes['name_romanization']);
 						$romanized = array_map('strtolower', $romanized);
-
+						
 						if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english)) || !empty(array_intersect($words, $romanized))) {
 							$resourceArray[] = $attributes;
 							$added = true;
 						}
+						*/
+						
+						$flag = array_strpos(strtolower($attributes['name_english']), $words);
+							
+						if ($added == false && $flag == true) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
+							
+						$flag = array_strpos(strtolower($attributes['name_romanization']), $words);
+							
+						if ($added == false && $flag == true) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
+							
+						$flag = array_strpos($attributes['name_japanese'], $words);
+							
+						if ($added == false && $flag == true) {
+							$resourceArray[] = $attributes;
+							$added = true;
+						}
+					
 					}
 
 					if (in_array("keywords", $searchType) && $added == false) {
@@ -188,5 +216,9 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$this->page['pagination'] = $pagination;
 		$this->page['categories'] = $categories;
 		$this->page['resources'] = $resourceArray;
+		
+		if ($countSet == false) {
+			$this->page['resourceCount'] = count($resourceArray);
+		}
     }
 }
