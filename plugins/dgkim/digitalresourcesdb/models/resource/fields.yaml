@@ -37,7 +37,7 @@ fields:
         label: 'Description of Resource (Japanese)'
         size: large
         span: full
-        required: 1
+        required: 0
         type: richeditor
     description:
         label: 'Description of Resource (English)'

@@ -5,6 +5,8 @@ use Input;
 use Validator;
 use Redirect;
 use Flash;
+use Response;
+use Cookie;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
 use Dgkim\DigitalResourcesDb\Models\Category;
@@ -52,6 +54,11 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$searchType = post('searchType');
 		$categoryFilter = post('categoryFilter');
 		$countSet = false;
+		$minutes = 60;
+		
+		$response = Response::make('searchFields');
+		$wordCookie = Cookie::make('searchWords', serialize($words), $minutes);
+		$response->withCookie($wordCookie);
 		
 		$alpha = get('page');
 		

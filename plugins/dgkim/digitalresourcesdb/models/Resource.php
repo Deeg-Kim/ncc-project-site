@@ -13,7 +13,7 @@ class Resource extends Model
      * Disable timestamps by default.
      * Remove this line if timestamps are defined in the database table.
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * @var array Validation rules
@@ -22,7 +22,6 @@ class Resource extends Model
 		'name_japanese'			=> 'required',
 		'name_romanization'		=> 'required',
 		'link'					=> 'required',
-		'description_japanese'	=> 'required',
 		'keywords'				=> 'required',
     ];
 

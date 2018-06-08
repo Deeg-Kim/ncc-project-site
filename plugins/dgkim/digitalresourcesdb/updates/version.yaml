@@ -15,3 +15,9 @@
 1.0.6:
     - 'Updated table dgkim_digitalresourcesdb_resources'
     - builder_table_update_dgkim_digitalresourcesdb_resources_2.php
+1.0.7:
+    - 'Updated table dgkim_digitalresourcesdb_resources'
+    - builder_table_update_dgkim_digitalresourcesdb_resources_3.php
+1.0.8:
+    - 'Updated table dgkim_digitalresourcesdb_resources'
+    - builder_table_update_dgkim_digitalresourcesdb_resources_4.php

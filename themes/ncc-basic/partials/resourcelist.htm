@@ -1,42 +1,42 @@
 description = "Resource list partial"
 ==
 <div id="resourceList">
-		All resources by romanization: 
-		<ul class="pagination">
-		{% for p in pagination %}
-			{% if p.active %}
-				<li class="active">
-			{% else %}
-				<li>
-			{% endif %}
+	All resources by romanization: 
+	<ul class="pagination">
+	{% for p in pagination %}
+		{% if p.active %}
+			<li class="active">
+		{% else %}
+			<li>
+		{% endif %}
 						
-			{% if p.has %}
-				<a href="/?page={{ p.letter }}">
-			{% else %}
-				<b>
-			{% endif %}
+		{% if p.has %}
+			<a href="/?page={{ p.letter }}">
+		{% else %}
+			<b>
+		{% endif %}
 						
-			{{ p.letter }}
+		{{ p.letter }}
 						
-			{% if not p.has %}
-				</b>
-			{% else %}
-				</a>
-			{% endif %}
+		{% if not p.has %}
+			</b>
+		{% else %}
+			</a>
+		{% endif %}
 						
-			{% if p.active %}
-				</li>
-			{% else %}
-				</li>
-			{% endif %}
-		{% endfor %}
-		</ul>
-		<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} found
+		{% if p.active %}
+			</li>
+		{% else %}
+			</li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+	<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} found
 	{% if resources|length %}
 	{% for resource in resources %}
 		<div class="card" style="width: 100%; margin: 20px 0 20px 0">
 			<div class="card-body">
-				<h4 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}" target="_blank">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h4>
+				<h4 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h4>
 				<h6 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h6>
 				{% for category in resource.categories %}
 				<span class="badge badge-primary">{{ category.name_english }}</span>
@@ -45,14 +45,25 @@ description = "Resource list partial"
 					<a href="{{ resource.link }}" class="card-link" target="_blank">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 				</p>
 				<p class="card-text">
+					{% if resource.updated_at is not empty %}
+					<div class="row" style="margin-bottom: 10px;">
+						<div class="col-12" style="font-size: 0.8em;">
+						<b>Resource updated:</b> {{ resource.updated_at|date('M jS, Y') }}
+						</div>
+					</div>
+					{% endif %}
+					{% if resource.description is not empty or resource.description_japanese is not empty %}
 					<div class="row">
-						{% if resource.description is not empty %}
+						{% if resource.description is empty %}
+						<div class="col-12">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
+						{% elseif resource.description_japanese is empty %}
+						<div class="col-12">{{ resource.description|striptags|length > 150 ? resource.description|striptags|slice(0, 150) ~ '...' : resource.description|striptags }}</div>
+						{% else %}
 						<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese|striptags|length > 70 ? resource.description_japanese|striptags|slice(0, 70) ~ '...' : resource.description_japanese|striptags }}</div>
 						<div class="col-6">{{ resource.description|striptags|length > 150 ? resource.description|striptags|slice(0, 150) ~ '...' : resource.description|striptags }}</div>
-						{% else %}
-						<div class="col-12">{{ resource.description_japanese|striptags|length > 100 ? resource.description_japanese|striptags|slice(0, 100) ~ '...' : resource.description_japanese|striptags }}</div>
 						{% endif %}
 					</div>
+					{% endif %}
 				</p>
 			</div>
 		</div>
