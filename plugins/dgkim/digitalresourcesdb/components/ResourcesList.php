@@ -53,17 +53,18 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$words = array_map('strtolower', $words);
 		$searchType = post('searchType');
 		$categoryFilter = post('categoryFilter');
-		$countSet = false;
 		$minutes = 60;
+		$in_page = 2; // number of entries per page of each romanization
 		
-		$response = Response::make('searchFields');
-		$wordCookie = Cookie::make('searchWords', serialize($words), $minutes);
-		$response->withCookie($wordCookie);
-		
-		$alpha = get('page');
+		$alpha = get('r');
+		$offset = get('page');
 		
 		if ($alpha == null) {
 			$alpha = 'A';
+		}
+		
+		if ($offset == null) {
+			$offset = 1;
 		}
 		
 		if (empty($categoryFilter)) {
@@ -74,11 +75,18 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$filterCount = count($categoryFilter);
 		
 		if (!empty($words[0]) || (($filterCount != 0) && ($categoryCount != $filterCount))) {
+			$searched = true;
 			$resources = Resource::orderBy('name_romanization')->get();
 		} else {
-			$resources = Resource::where('name_romanization', 'like', $alpha . '%')->orderBy('name_romanization')->get();
-			$this->page['resourceCount'] = count(Resource::orderBy('name_romanization')->get());
-			$countSet = true;
+			$searched = false;
+			$count = Resource::where('name_romanization', 'like', $alpha . '%')->count();
+			$page_count = ceil($count/$in_page);
+			
+			$resources = Resource::where('name_romanization', 'like', $alpha . '%')
+				->orderBy('name_romanization')
+				->skip(($offset - 1) * $in_page)
+				->limit($in_page)
+				->get();
 		}
 		$resourceArray = [];
 		
@@ -123,19 +131,6 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 					$added = false;
 
 					if (in_array("title", $searchType) && $added == false) {
-						// old search functionality
-						/*
-						$english = explode(' ', $attributes['name_english']);
-						$english = array_map('strtolower', $english);
-						
-						$romanized = explode(' ', $attributes['name_romanization']);
-						$romanized = array_map('strtolower', $romanized);
-						
-						if(!empty(array_intersect($words, explode(' ', $attributes['name_japanese']))) || !empty(array_intersect($words, $english)) || !empty(array_intersect($words, $romanized))) {
-							$resourceArray[] = $attributes;
-							$added = true;
-						}
-						*/
 						
 						$flag = array_strpos(strtolower($attributes['name_english']), $words);
 							
@@ -220,12 +215,19 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			);
 		}
 		
+		if ($searched) {
+			$page_count = 0;		
+		}
+		
 		$this->page['pagination'] = $pagination;
 		$this->page['categories'] = $categories;
 		$this->page['resources'] = $resourceArray;
 		
-		if ($countSet == false) {
-			$this->page['resourceCount'] = count($resourceArray);
-		}
+		$this->page['searched'] = $searched;
+		$this->page['pageCount'] = $page_count;
+		$this->page['offset'] = $offset;
+		$this->page['alpha'] = $alpha;
+		$this->page['resourceCount'] = count($resourceArray);
+		$this->page['totalCount'] = Resource::count();
     }
 }

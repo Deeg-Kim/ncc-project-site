@@ -1,25 +1,30 @@
 description = "Resource list partial"
 ==
 <div id="resourceList">
+	{% if not searched %}
 	All resources by romanization: 
-	<ul class="pagination">
+	<ul class="pagination pagination-sm">
 	{% for p in pagination %}
 		{% if p.active %}
-			<li class="active">
+			<li class="page-item active">
 		{% else %}
-			<li>
+			{% if p.has %}
+			<li class="page-item">
+			{% else %}
+			<li class="page-item disabled">
+			{% endif %}
 		{% endif %}
 						
 		{% if p.has %}
-			<a href="/?page={{ p.letter }}">
+			<a class="page-link" href="/?r={{ p.letter }}">
 		{% else %}
-			<b>
+			<a class="page-link" href="#" tabindex="-1">
 		{% endif %}
 						
 		{{ p.letter }}
 						
 		{% if not p.has %}
-			</b>
+			</a>
 		{% else %}
 			</a>
 		{% endif %}
@@ -27,11 +32,39 @@ description = "Resource list partial"
 		{% if p.active %}
 			</li>
 		{% else %}
+			{% if p.has %}
 			</li>
+			{% else %}
+			</li>
+			{% endif %}
 		{% endif %}
 	{% endfor %}
 	</ul>
-	<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} found
+	{% endif %}
+	{% if searched %}
+	<h5><b>Search Results</b></h5>
+	{% else %}
+	<h5><b>Resources starting with "{{ alpha }}"</b> <span class="small">(Romanized)</span></h5>
+	{% endif %}
+	{% if pageCount %}
+	Skip to page:
+	<ul class="pagination pagination-sm">
+	{% for p in range(1, pageCount) %}
+		{% if p == offset %}
+			<li class="page-item active">
+		{% else %}
+			<li class="page-item">
+		{% endif %}
+				<a class="page-link" href="/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
+		{% if p == offset %}
+			</li>
+		{% else %}
+			</li>
+		{% endif %}		
+	{% endfor %}
+	</ul>
+	{% endif %}
+	<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} on this page of <b>{{ totalCount }}</b> total record{% if totalCount != 1 %}s{% endif %} in the database
 	{% if resources|length %}
 	{% for resource in resources %}
 		<div class="card" style="width: 100%; margin: 20px 0 20px 0">
@@ -45,13 +78,6 @@ description = "Resource list partial"
 					<a href="{{ resource.link }}" class="card-link" target="_blank">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
 				</p>
 				<p class="card-text">
-					{% if resource.updated_at is not empty %}
-					<div class="row" style="margin-bottom: 10px;">
-						<div class="col-12" style="font-size: 0.8em;">
-						<b>Resource updated:</b> {{ resource.updated_at|date('M jS, Y') }}
-						</div>
-					</div>
-					{% endif %}
 					{% if resource.description is not empty or resource.description_japanese is not empty %}
 					<div class="row">
 						{% if resource.description is empty %}
@@ -64,10 +90,35 @@ description = "Resource list partial"
 						{% endif %}
 					</div>
 					{% endif %}
+					{% if resource.updated_at is not empty %}
+					<div class="row" style="margin-bottom: 10px;">
+						<div class="col-12" style="font-size: 0.8em;">
+						<b>Resource updated:</b> {{ resource.updated_at|date('M jS, Y') }}
+						</div>
+					</div>
+					{% endif %}
 				</p>
 			</div>
 		</div>
 	{% endfor %}
+	{% if pageCount %}
+	Skip to page:
+	<ul class="pagination pagination-sm">
+	{% for p in range(1, pageCount) %}
+		{% if p == offset %}
+			<li class="page-item active">
+		{% else %}
+			<li class="page-item">
+		{% endif %}
+				<a class="page-link" href="/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
+		{% if p == offset %}
+			</li>
+		{% else %}
+			</li>
+		{% endif %}		
+	{% endfor %}
+	</ul>
+	{% endif %}
 	{% else %}
 	<h2 class="text-center">No resources found!</h2>
 	{% endif %}
