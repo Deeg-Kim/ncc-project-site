@@ -54,7 +54,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$searchType = post('searchType');
 		$categoryFilter = post('categoryFilter');
 		$minutes = 60;
-		$in_page = 2; // number of entries per page of each romanization
+		$in_page = 10; // number of entries per page of each romanization
 		
 		$alpha = get('r');
 		$offset = get('page');
