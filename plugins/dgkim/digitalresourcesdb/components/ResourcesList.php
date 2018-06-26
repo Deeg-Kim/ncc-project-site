@@ -27,6 +27,12 @@ class ResourcesList extends \Cms\Classes\ComponentBase
             'description' => 'Load list of all resources'
         ];
     }
+
+	function microtime_float()
+	{
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
+	}
 	
 	public function onRun()
 	{
@@ -35,7 +41,13 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 	
 	function onFilter() 
 	{ 
+		$time_pre = $this->microtime_float();
+		
 		$this->prepareVars(); 
+		
+		$time_end = $this->microtime_float();
+		
+		$this->page['method_time'] = $time_end - $time_pre;
 	}
 	
 	function prepareVars() {
@@ -91,7 +103,9 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$resourceArray = [];
 		
 		foreach ($resources as $resource) {
-				
+			
+			/*
+			$time_pre_3 = $this->microtime_float(true);
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $resource->link);
 			curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -100,17 +114,53 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			$headers = curl_getinfo($ch);
 			curl_close($ch);
 
-			$status = $headers['http_code'];
-
-			$attributes = $resource->attributes;
-
 			if ($status == 200 || $status == 301 || $status == 302) {
 				$attributes['broken'] = 0;
 			} else {
 				$attributes['broken'] = 1;
 			}
+			*/
+			
+			$attributes = $resource->attributes;
 			
 			$attributes['categories'] = $resource->categories;
+			
+			// build description blurbs
+			if ($resource->description != "") {
+				$str = $resource->description;
+				// preg_match('/<p>(.*?)<\/p>/i', $str, $paragraphs);
+				$paragraphs = preg_split('/<\/\s*p\s*>/', $str);
+					
+				if (!empty($paragraphs[1])) {
+					if (strlen(strip_tags($paragraphs[0])) > 150) {
+						$attributes['description_blurb'] = $paragraphs[0];
+					} else {
+						$attributes['description_blurb'] = $paragraphs[0] . $paragraphs[1];
+					}
+				} else {
+					$attributes['description_blurb'] = $paragraphs[0];
+				}
+			} else {
+				$attributes['description_blurb'] = "";	
+			}
+			
+			if ($resource->description_japanese != "") {
+				$str = $resource->description_japanese;
+				// preg_match('/<p>(.*?)<\/p>/i', $str, $paragraphs);
+				$paragraphs = preg_split('/<\/\s*p\s*>/', $str);
+				
+				if (!empty($paragraphs[1])) {
+					if (strlen(strip_tags($paragraphs[0])) > 150) {
+						$attributes['description_japanese_blurb'] = $paragraphs[0];
+					} else {
+						$attributes['description_japanese_blurb'] = $paragraphs[0] . $paragraphs[1];
+					}
+				} else {
+					$attributes['description_japanese_blurb'] = $paragraphs[0];
+				}
+			} else {
+				$attributes['description_japanese_blurb'] = "";	
+			}
 			
 			$categoryIds = [];
 			
@@ -129,7 +179,6 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 				} else {
 
 					$added = false;
-
 					if (in_array("title", $searchType) && $added == false) {
 						
 						$flag = array_strpos(strtolower($attributes['name_english']), $words);
@@ -154,7 +203,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 						}
 					
 					}
-
+					
 					if (in_array("keywords", $searchType) && $added == false) {
 						$keywords = explode(',', $attributes['keywords']);
 						$keywords = array_map('strtolower', $keywords);
