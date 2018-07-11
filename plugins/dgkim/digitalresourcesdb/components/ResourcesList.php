@@ -61,6 +61,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$categories = Category::get();
 		
         $words = post('search');
+		$full = $words;
 		$words = explode(' ', $words);
 		$words = array_map('strtolower', $words);
 		$searchType = post('searchType');
@@ -208,7 +209,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 						$keywords = explode(',', $attributes['keywords']);
 						$keywords = array_map('strtolower', $keywords);
 
-						if(!empty(array_intersect($keywords, $words))) {
+						if(!empty(array_intersect($keywords, $words)) || !empty(array_intersect($keywords, array($full)))) {
 							$resourceArray[] = $attributes;
 							$added = true;
 						}

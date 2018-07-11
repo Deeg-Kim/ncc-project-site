@@ -71,7 +71,11 @@ description = "Resource list partial"
 	{% for resource in resources %}
 		<div class="card" style="width: 100%; margin: 20px 0 20px 0">
 			<div class="card-body">
-				<h4 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }} | {{ resource.name_romanization }}</a></h4>
+				<div class="row">
+					<div class="col-6" style="border-right: 1px black solid;"><h4 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h4></div>
+					<div class="col-6"><h4 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_romanization }}</a></h4></div>
+				</div>
+				<h4 class="card-title">
 				<h6 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h6>
 				{% for category in resource.categories %}
 				<span class="badge badge-primary">{{ category.name_english }}</span>
@@ -85,7 +89,7 @@ description = "Resource list partial"
 						{% if resource.description is empty %}
 						<div class="col-12">{{ resource.description_japanese_blurb|raw }}<p><a href="{{ url('/resource/') }}/{{ resource.id }}">...</a></p></div>
 						{% elseif resource.description_japanese is empty %}
-						<div class="col-12">{{ resource.description_blurb|raw }}<p><a href="{{ url('/resource/') }}/{{ resource.id }}">...</a></p>></div>
+						<div class="col-12">{{ resource.description_blurb|raw }}<p><a href="{{ url('/resource/') }}/{{ resource.id }}">...</a></p></div>
 						{% else %}
 						<div class="col-6" style="border-right: 1px black solid;">{{ resource.description_japanese_blurb|raw }}<p><a href="{{ url('/resource/') }}/{{ resource.id }}">...</a></p></div>
 						<div class="col-6">{{ resource.description_blurb|raw }}<p><a href="{{ url('/resource/') }}/{{ resource.id }}">...</a></p></div>

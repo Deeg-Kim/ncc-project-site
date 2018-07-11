@@ -4,7 +4,10 @@
 		<a href="{{ url('/' )}}">Back to all resources</a>
 		<div class="card" style="width: 100%; margin: 10px 0 10px 0">
 			<div class="card-body">
-				<h3 class="card-title">{{ resource.name_japanese }} | {{ resource.name_romanization }}</h3>
+				<div class="row">
+					<div class="col-6" style="border-right: 1px black solid;"><h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h3></div>
+					<div class="col-6"><h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_romanization }}</a></h3></div>
+				</div>
 				<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
 				{% for category in resource.categories %}
 				<span class="badge badge-primary">{{ category.name_english }}</span>

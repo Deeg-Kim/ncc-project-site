@@ -18,3 +18,7 @@ navigation:
                 label: Categories
                 url: dgkim/digitalresourcesdb/categories
                 icon: icon-sitemap
+            side-menu-item-broken:
+                label: 'Broken Links'
+                url: dgkim/digitalresourcesdb/brokenlinks
+                icon: icon-warning
