@@ -5,15 +5,15 @@
 		<div class="card" style="width: 100%; margin: 10px 0 10px 0">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-6" style="border-right: 1px black solid;"><h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_japanese }}</a></h3></div>
-					<div class="col-6"><h3 class="card-title"><a href="{{ url('/resource/') }}/{{ resource.id }}">{{ resource.name_romanization }}</a></h3></div>
+					<div class="col-6" style="border-right: 1px black solid;"><h3 class="card-title">{{ resource.name_japanese }}</h3></div>
+					<div class="col-6"><h3 class="card-title">{{ resource.name_romanization }}</h3></div>
 				</div>
 				<h5 class="card-subtitle mb-2 text-muted">{{ resource.name_english }}</h5>
 				{% for category in resource.categories %}
 				<span class="badge badge-primary">{{ category.name_english }}</span>
 				{% endfor %}
 				<p>
-					<a href="{{ resource.link }}" class="card-link">{{ resource.link }}</a> {% if broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
+					Collection URL: <a href="{{ resource.link }}" class="card-link">{{ resource.link }}</a>
 				</p>
 				<p class="card-text">
 					<div class="row">

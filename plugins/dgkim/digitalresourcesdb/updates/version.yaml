@@ -21,3 +21,9 @@
 1.0.8:
     - 'Updated table dgkim_digitalresourcesdb_resources'
     - builder_table_update_dgkim_digitalresourcesdb_resources_4.php
+1.0.9:
+    - 'Created table dgkim_digitalresourcesdb_blscan'
+    - builder_table_create_dgkim_digitalresourcesdb_blscan.php
+1.0.10:
+    - 'Created table dgkim_digitalresourcesdb_brokenlinks'
+    - builder_table_create_dgkim_digitalresourcesdb_brokenlinks.php

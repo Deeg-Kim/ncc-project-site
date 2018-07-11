@@ -1,0 +1,16 @@
+columns:
+    scan_start:
+        label: 'Scan Date'
+        type: date
+        searchable: true
+        sortable: true
+    scannedby:
+        label: 'Scan Run By'
+        type: text
+        searchable: false
+        sortable: false
+    numberlinks:
+        label: 'Number of Broken Links'
+        type: number
+        searchable: false
+        sortable: false

@@ -58,7 +58,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			return false;
 		}
 		
-		$categories = Category::get();
+		$categories = Category::orderBy('name_english')->get();
 		
         $words = post('search');
 		$full = $words;
@@ -104,23 +104,6 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$resourceArray = [];
 		
 		foreach ($resources as $resource) {
-			
-			/*
-			$time_pre_3 = $this->microtime_float(true);
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $resource->link);
-			curl_setopt($ch, CURLOPT_HEADER, 1);
-			curl_setopt($ch , CURLOPT_RETURNTRANSFER, 1);
-			$data = curl_exec($ch);
-			$headers = curl_getinfo($ch);
-			curl_close($ch);
-
-			if ($status == 200 || $status == 301 || $status == 302) {
-				$attributes['broken'] = 0;
-			} else {
-				$attributes['broken'] = 1;
-			}
-			*/
 			
 			$attributes = $resource->attributes;
 			

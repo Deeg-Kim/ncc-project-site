@@ -81,7 +81,7 @@ description = "Resource list partial"
 				<span class="badge badge-primary">{{ category.name_english }}</span>
 				{% endfor %}
 				<p>
-					<a href="{{ resource.link }}" class="card-link" target="_blank">{{ resource.link }}</a> {% if resource.broken %}<a data-trigger="focus" tabindex="0" class="broken badge badge-danger" data-toggle="popover" title="Possibly broken link!" data-content="We've detected that this link may no longer be directing you to a live resource.">!</a>{% endif %}
+					Collection URL: <a href="{{ resource.link }}" class="card-link" target="_blank">{{ resource.link }}</a>
 				</p>
 				<p class="card-text">
 					{% if resource.description is not empty or resource.description_japanese is not empty %}

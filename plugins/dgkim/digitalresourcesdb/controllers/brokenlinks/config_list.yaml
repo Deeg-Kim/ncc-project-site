@@ -1,0 +1,12 @@
+list: $/dgkim/digitalresourcesdb/models/blscan/columns.yaml
+modelClass: Dgkim\DigitalResourcesDb\Models\Blscan
+title: Broken Link Scans
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'dgkim/digitalresourcesdb/brokenlinks/view/:id'

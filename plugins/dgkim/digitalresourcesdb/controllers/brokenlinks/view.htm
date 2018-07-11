@@ -1,0 +1,34 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('dgkim/digitalresourcesdb/brokenlinks') ?>">Broken Links</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<h3>Scan Report</h3>
+<p>Scan run on <?php echo $scan->scan_start; ?> by <?php echo $scanned_by; ?>.</p>
+
+<div class="list-widget list-scrollable-container" id="Lists">
+<div class="control-list list-scrollable" data-control="listwidget">
+	<table class="table data" data-control="rowlink">
+		<thead>
+			<tr>
+				<th class="list-cell-name-resource list-cell-type-text"><a>Resource ID</a></th>
+				<th class="list-cell-name-name list-cell-type-text"><a>Resource Name</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				foreach ($scan->brokenlinks as $bl) {
+			?>
+			<tr class="rowlink">
+				<td class="list-cell-index-1 list-cell-name-resource list-cell-type-text"><a href="../../resources/update/<?php echo $bl->resource->id; ?>" style="display: none;"><?php echo $bl->resource->id; ?></a></td>
+				<td class="list-cell-index-2 list-cell-name-name list-cell-type-text"><?php echo $bl->resource->name_romanization; ?></td>
+			</tr>
+			<?php
+				}
+			?>
+		</tbody>
+	</table>
+</div>
+</div>
