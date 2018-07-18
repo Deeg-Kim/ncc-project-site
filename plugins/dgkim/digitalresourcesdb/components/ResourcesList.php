@@ -6,6 +6,7 @@ use Validator;
 use Redirect;
 use Flash;
 use Response;
+use Session;
 use Cookie;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
@@ -41,13 +42,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 	
 	function onFilter() 
 	{ 
-		$time_pre = $this->microtime_float();
-		
 		$this->prepareVars(); 
-		
-		$time_end = $this->microtime_float();
-		
-		$this->page['method_time'] = $time_end - $time_pre;
 	}
 	
 	function prepareVars() {
@@ -60,17 +55,28 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		
 		$categories = Category::orderBy('name_english')->get();
 		
-        $words = post('search');
+		$alpha = get('r');
+		
+		if (get('st') == '' || post('submit')) {
+        	$words = post('search');
+			$offset = get('page');
+			$searchType = post('searchType');
+			$categoryFilter = post('categoryFilter');
+		} else {
+			$words = get('q');
+			$offset = get('page');
+			$searchType = unserialize(get('st'));
+			$categoryFilter = unserialize(get('cf'));
+		}
+		if (post('submit')) {
+			$offset = 1;
+		}
+		
 		$full = $words;
 		$words = explode(' ', $words);
 		$words = array_map('strtolower', $words);
-		$searchType = post('searchType');
-		$categoryFilter = post('categoryFilter');
 		$minutes = 60;
 		$in_page = 10; // number of entries per page of each romanization
-		
-		$alpha = get('r');
-		$offset = get('page');
 		
 		if ($alpha == null) {
 			$alpha = 'A';
@@ -248,8 +254,27 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			);
 		}
 		
+		$this->page['resourceCount'] = count($resourceArray);
+		
 		if ($searched) {
-			$page_count = 0;		
+			$count = count($resourceArray);
+			$page_count = ceil($count/$in_page);
+			
+			$resources = Resource::where('name_romanization', 'like', $alpha . '%')
+				->orderBy('name_romanization')
+				->skip(($offset - 1) * $in_page)
+				->limit($in_page)
+				->get();
+			
+			if (!empty($resourceArray)) {
+				$paginatedArray = array();
+
+				for ($i = 0; $i < $in_page; $i++) {
+					$paginatedArray[] = $resourceArray[($offset - 1) * $in_page];
+				}
+
+				$resourceArray = $paginatedArray;
+			}
 		}
 		
 		$this->page['pagination'] = $pagination;
@@ -257,10 +282,16 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$this->page['resources'] = $resourceArray;
 		
 		$this->page['searched'] = $searched;
+		
+		if ($searched) {
+			$this->page['words'] = $full;
+			$this->page['searchType'] = serialize($searchType);
+			$this->page['categoryFilter'] = serialize($categoryFilter);
+		}
+		
 		$this->page['pageCount'] = $page_count;
 		$this->page['offset'] = $offset;
 		$this->page['alpha'] = $alpha;
-		$this->page['resourceCount'] = count($resourceArray);
 		$this->page['totalCount'] = Resource::count();
     }
 }

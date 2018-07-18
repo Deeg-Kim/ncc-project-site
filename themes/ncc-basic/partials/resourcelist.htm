@@ -46,6 +46,9 @@ description = "Resource list partial"
 	{% else %}
 	<h5><b>Resources starting with "{{ alpha }}"</b> <span class="small">(Romanized)</span></h5>
 	{% endif %}
+	{% if searched %}
+	<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} found<br />
+	{% endif %}
 	{% if pageCount %}
 	Skip to page:
 	<ul class="pagination pagination-sm">
@@ -55,7 +58,11 @@ description = "Resource list partial"
 		{% else %}
 			<li class="page-item">
 		{% endif %}
+				{% if searched %}
+				<a class="page-link" href="/?q={{ words }}&st={{ searchType }}&cf={{ categoryFilter }}&page={{ p }}">{{ p }}</a>
+				{% else %}
 				<a class="page-link" href="/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
+				{% endif %}
 		{% if p == offset %}
 			</li>
 		{% else %}
@@ -63,9 +70,6 @@ description = "Resource list partial"
 		{% endif %}		
 	{% endfor %}
 	</ul>
-	{% endif %}
-	{% if searched %}
-	<b>{{ resourceCount }}</b> record{% if resourceCount != 1 %}s{% endif %} found
 	{% endif %}
 	{% if resources|length %}
 	{% for resource in resources %}
