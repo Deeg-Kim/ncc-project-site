@@ -268,9 +268,11 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 			
 			if (!empty($resourceArray)) {
 				$paginatedArray = array();
-
+				$total = count($resourceArray);
 				for ($i = 0; $i < $in_page; $i++) {
-					$paginatedArray[] = $resourceArray[($offset - 1) * $in_page];
+					if ((($offset - 1) * $in_page + $i) < $total) {
+						$paginatedArray[] = $resourceArray[($offset - 1) * $in_page + $i];
+					}
 				}
 
 				$resourceArray = $paginatedArray;
