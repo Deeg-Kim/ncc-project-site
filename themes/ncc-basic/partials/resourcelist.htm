@@ -16,7 +16,7 @@ description = "Resource list partial"
 		{% endif %}
 						
 		{% if p.has %}
-			<a class="page-link" href="/?r={{ p.letter }}">
+			<a class="page-link" href="{{ url('/') }}/?r={{ p.letter }}">
 		{% else %}
 			<a class="page-link" href="#" tabindex="-1">
 		{% endif %}
@@ -59,9 +59,9 @@ description = "Resource list partial"
 			<li class="page-item">
 		{% endif %}
 				{% if searched %}
-				<a class="page-link" href="/?q={{ words }}&st={{ searchType }}&cf={{ categoryFilter }}&page={{ p }}">{{ p }}</a>
+				<a class="page-link" href="{{ url('/') }}/?q={{ words }}&st={{ searchType }}&cf={{ categoryFilter }}&page={{ p }}">{{ p }}</a>
 				{% else %}
-				<a class="page-link" href="/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
+				<a class="page-link" href="{{ url('/') }}/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
 				{% endif %}
 		{% if p == offset %}
 			</li>
@@ -113,7 +113,7 @@ description = "Resource list partial"
 		{% else %}
 			<li class="page-item">
 		{% endif %}
-				<a class="page-link" href="/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
+				<a class="page-link" href="{{ url('/') }}/?r={{ alpha }}&page={{ p }}">{{ p }}</a>
 		{% if p == offset %}
 			</li>
 		{% else %}

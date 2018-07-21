@@ -54,7 +54,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		}
 		
 		$categories = Category::orderBy('name_english')->get();
-		
+
 		$alpha = get('r');
 		
 		if (get('st') == '' || post('submit')) {
