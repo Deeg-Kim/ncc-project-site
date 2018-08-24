@@ -1,7 +1,11 @@
 <div class="row">
 	<div class="col-md-8 offset-md-2">
 		<div style="width: 100%; height: 15px"></div>
-		<a href="{{ url('/' )}}">Back to all resources</a>
+		{% if pagedata.searched %}
+		<a href="{{ url('/') }}?q={{ pagedata.q }}&st={{ pagedata.st }}&cf={{ pagedata.cf }}&page={{ pagedata.page }}">Back to search results</a>
+		{% else %}
+		<a href="{{ url('/' )}}?r={{ pagedata.r }}&page={{ pagedata.page }}">Back to resources list</a>
+		{% endif %}
 		<div class="card" style="width: 100%; margin: 10px 0 10px 0">
 			<div class="card-body">
 				<div class="row">
@@ -37,7 +41,7 @@
 	.broken:link {
 		color: white;
 	}
-	
+
 	.broken:hover {
 		color: white;
 		cursor: pointer;
