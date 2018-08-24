@@ -75,7 +75,7 @@ class ResourcesList extends \Cms\Classes\ComponentBase
 		$full = $words;
 		$words = explode(' ', $words);
 		$words = array_map('strtolower', $words);
-		$in_page = 1; // number of entries per page of each romanization
+		$in_page = 10; // number of entries per page of each romanization
 
 		if ($alpha == null) {
 			$alpha = 'A';
